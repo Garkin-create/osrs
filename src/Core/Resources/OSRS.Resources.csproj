@@ -1,0 +1,35 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+    <PropertyGroup>
+        <TargetFramework>net6.0</TargetFramework>
+        <ImplicitUsings>enable</ImplicitUsings>
+        <Nullable>enable</Nullable>
+        <RootNamespace>OSRS.Resourse</RootNamespace>
+        <LangVersion>preview</LangVersion>
+    </PropertyGroup>
+
+    <ItemGroup>
+      <EmbeddedResource Update="Localizations\I18n.resx">
+        <Generator>ResXFileCodeGenerator</Generator>
+        <LastGenOutput>I18n.Designer.cs</LastGenOutput>
+      </EmbeddedResource>
+      <EmbeddedResource Update="Localizations\I18n.es.resx">
+        <Generator>ResXFileCodeGenerator</Generator>
+        <LastGenOutput>I18n.es.Designer.cs</LastGenOutput>
+      </EmbeddedResource>
+    </ItemGroup>
+
+    <ItemGroup>
+      <Compile Update="Localizations\I18n.Designer.cs">
+        <DesignTime>True</DesignTime>
+        <AutoGen>True</AutoGen>
+        <DependentUpon>I18n.resx</DependentUpon>
+      </Compile>
+      <Compile Update="Localizations\I18n.es.Designer.cs">
+        <DesignTime>True</DesignTime>
+        <AutoGen>True</AutoGen>
+        <DependentUpon>I18n.es.resx</DependentUpon>
+      </Compile>
+    </ItemGroup>
+
+</Project>
