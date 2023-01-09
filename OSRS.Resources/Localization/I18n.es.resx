@@ -1,0 +1,96 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+
+<root>
+    <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+        <xsd:element name="root" msdata:IsDataSet="true">
+            
+        </xsd:element>
+    </xsd:schema>
+    <resheader name="resmimetype">
+        <value>text/microsoft-resx</value>
+    </resheader>
+    <resheader name="version">
+        <value>1.3</value>
+    </resheader>
+    <resheader name="reader">
+        <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    </resheader>
+    <resheader name="writer">
+        <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    </resheader>
+    <data name="PinarDelRio" xml:space="preserve">
+        <value>Pinar del Río</value>
+    </data>
+    <data name="Artemisa" xml:space="preserve">
+        <value>Artemisa</value>
+    </data>
+    <data name="Mayabeque" xml:space="preserve">
+        <value>Mayabeque</value>
+    </data>
+    <data name="Matanzas" xml:space="preserve">
+        <value>Matanzas</value>
+    </data>
+    <data name="VillaClara" xml:space="preserve">
+        <value>Villa Clara</value>
+    </data>
+    <data name="Cienfuegos" xml:space="preserve">
+        <value>Cienfuegos</value>
+    </data>
+    <data name="CiegoDeAvila" xml:space="preserve">
+        <value>Ciego de Avila	</value>
+    </data>
+    <data name="SantiSpiritus" xml:space="preserve">
+        <value>Sancti Spíritus</value>
+    </data>
+    <data name="Camaguey" xml:space="preserve">
+        <value>Camagüey</value>
+    </data>
+    <data name="LasTunas" xml:space="preserve">
+        <value>Las Tunas</value>
+    </data>
+    <data name="Holguin" xml:space="preserve">
+        <value>Holguín</value>
+    </data>
+    <data name="Granma" xml:space="preserve">
+        <value>Granma</value>
+    </data>
+    <data name="SantiagoDeCuba" xml:space="preserve">
+        <value>Santiago de Cuba</value>
+    </data>
+    <data name="Guantanamo" xml:space="preserve">
+        <value>Guantánamo</value>
+    </data>
+    <data name="IslaJuventud" xml:space="preserve">
+        <value>Isla de la Juventud</value>
+    </data>
+    <data name="LaHabana" xml:space="preserve">
+        <value>La Habana</value>
+    </data>
+    <data name="Invalid" xml:space="preserve">
+        <value>Invalid</value>
+    </data>
+    <data name="UnknownError" xml:space="preserve">
+        <value>Error Desconocido</value>
+    </data>
+    <data name="Crudo" xml:space="preserve">
+        <value>Crudo</value>
+    </data>
+    <data name="FuelOil" xml:space="preserve">
+        <value>FuelOil</value>
+    </data>
+    <data name="JetFuel" xml:space="preserve">
+        <value>JetFuel</value>
+    </data>
+    <data name="TransitionZone" xml:space="preserve">
+        <value>TransitionZone</value>
+    </data>
+    <data name="Gasoline" xml:space="preserve">
+        <value>Gasoline</value>
+    </data>
+    <data name="LubricatingOil" xml:space="preserve">
+        <value>LubricatingOil</value>
+    </data>
+    <data name="Otros" xml:space="preserve">
+        <value>Otros</value>
+    </data>
+</root>
