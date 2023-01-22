@@ -9,7 +9,9 @@ using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using OSRS.Domain.Seed.UnitOfWorks;
 using OSRS.Infrastructure.Repositories;
+using Stu.Cubatel.Infrastructure.Model.Domain;
 
 namespace OSRS.Infrastructure
 {
@@ -60,7 +62,7 @@ namespace OSRS.Infrastructure
                 })
                 .AddEntityFrameworkStores<DomainContext>();
            
-            services.AddSingleton<IdentityUserContext<IdentityUser>, DomainContext>();
+            // services.AddSingleton<IdentityUserContext<IdentityUser>, DomainContext>();
 
             return services;
         }
@@ -77,6 +79,10 @@ namespace OSRS.Infrastructure
                     AddCommonImplementationService(services, i, j);
                 }
             }
+            
+            services.AddScoped<IDomainUnitOfWork, DomainUnitOfWork>();
+            services.AddScoped<IAlchemyRepository, AlchemyRepository>();
+            services.AddScoped<IUserAccountRepository, UserAccountRepository>();
 
             return services;
         }

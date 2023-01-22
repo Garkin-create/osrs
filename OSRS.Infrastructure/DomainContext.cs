@@ -8,7 +8,7 @@ using OSRS.Domain.Entities.Item;
 
 namespace OSRS.Infrastructure
 {
-    public partial class DomainContext : IdentityUserContext<IdentityUser>
+    public partial class DomainContext : DbContext // IdentityUserContext<IdentityUser>
     {
         public DomainContext()
         {
@@ -36,7 +36,7 @@ namespace OSRS.Infrastructure
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            base.OnModelCreating(modelBuilder);
+            // base.OnModelCreating(modelBuilder);
             modelBuilder.HasAnnotation("Relational:Collation", "SQL_Latin1_General_CP1_CI_AS");
 
             //ENTITIES

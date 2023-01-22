@@ -11,19 +11,31 @@ using OSRS.Domain.Seed;
 
 namespace OSRS.Infrastructure.Repositories
 {
-    public class AlchemyRepository: BaseEntityRepository<AlchemyObject>, IAlchemyEntityRepository
+    public class AlchemyRepository: BaseEntityRepository<AlchemyObject>, IAlchemyRepository
     {
-
-        public AlchemyRepository(DbContext dbContext, ISystemLogger logger) : base(dbContext, logger)
+        public AlchemyRepository(DomainContext dbContext, ISystemLogger logger) : base(dbContext, logger)
         {
         }
 
-        
+
+        public async Task<bool> AddAlchemy(AlchemyObject alchemy, CancellationToken cancellationToken = default)
+        {
+            var result = false;
+            try
+            {
+                result = await AddAsync(alchemy);
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+            }
+            return result;
+        }
     }
 
-    public interface IAlchemyEntityRepository: IEntityRepository<AlchemyObject>
+    public interface IAlchemyRepository: IEntityRepository<AlchemyObject>
     {
-        
+        public Task<bool> AddAlchemy(AlchemyObject alchemy, CancellationToken cancellationToken = default);
     }
 
 }

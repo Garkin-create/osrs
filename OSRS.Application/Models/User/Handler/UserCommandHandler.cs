@@ -15,7 +15,7 @@ namespace OSRS.Application.Models.User.Handler
     {
         private readonly IMapper _mapper;
         private readonly IUserAccountRepository _accountRepository;
-
+        
         public UserCommandHandler(IMapper mapper, IUserAccountRepository accountRepository)
         {
             _mapper = mapper;

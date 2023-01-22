@@ -10,11 +10,11 @@ namespace OSRS.Infrastructure.Repositories
 {
     public class UserAccountRepository : BaseEntityRepository<UserAccountObject>, IUserAccountRepository
     {
-        // private readonly UserManager<IdentityUser> _userManager;
+        private readonly UserManager<IdentityUser> _userManager;
 
-        public UserAccountRepository(DomainContext domainContext, ISystemLogger logger): base(domainContext, logger)
+        public UserAccountRepository(DomainContext domainContext, ISystemLogger logger, UserManager<IdentityUser> userManager): base(domainContext, logger)
         {
-            // _userManager = userManager;
+            _userManager = userManager;
         }
         
         public async Task<bool> AddUser(UserAccountObject userAccount, CancellationToken cancellationToken = default)
@@ -22,9 +22,9 @@ namespace OSRS.Infrastructure.Repositories
             var result = false;
             try
             {
-                // result = (await _userManager.CreateAsync(
-                //     new IdentityUser() {UserName = userAccount.UserName, Email = userAccount.Email},
-                //     userAccount.Password)).Succeeded;
+                result = (await _userManager.CreateAsync(
+                    new IdentityUser() {UserName = userAccount.UserName, Email = userAccount.Email},
+                    userAccount.Password)).Succeeded;
             }
             catch (Exception e)
             {
@@ -36,7 +36,7 @@ namespace OSRS.Infrastructure.Repositories
         }
     }
     
-    public interface IUserAccountRepository 
+    public interface IUserAccountRepository : IEntityRepository<UserAccountObject>
     {
         public Task<bool> AddUser(UserAccountObject userAccount, CancellationToken cancellationToken = default);
     }

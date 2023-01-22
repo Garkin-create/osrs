@@ -65,9 +65,8 @@ namespace OSRS
 
             services.AddControllers();
             services.AddDbContext<DomainContext>();
-            services.AddSingleton<ISystemLogger, SystemLogger>();
-            services.AddSingleton<IUserAccountRepository, UserAccountRepository>();
-            services.AddSingleton<IAlchemyEntityRepository, AlchemyRepository>();
+            // services.AddSingleton<IUserAccountRepository, UserAccountRepository>();
+            // services.AddSingleton<IAlchemyEntityRepository, AlchemyRepository>();
 
             services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
             services.AddSwaggerGen(c =>
