@@ -4,9 +4,12 @@ using System.Reflection;
 using OSRS.Domain.Seed;
 using OSRS.Infrastructure.Repositories.Resiliency;
 using MediatR;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using OSRS.Infrastructure.Repositories;
 
 namespace OSRS.Infrastructure
 {
@@ -14,6 +17,18 @@ namespace OSRS.Infrastructure
     {
         public static IServiceCollection AddInfrastructure(this IServiceCollection services, IConfiguration configuration)
         {
+           
+            services
+                .AddIdentityCore<IdentityUser>(options => {
+                    options.SignIn.RequireConfirmedAccount = false;
+                    options.User.RequireUniqueEmail = true;
+                    options.Password.RequireDigit = false;
+                    options.Password.RequiredLength = 6;
+                    options.Password.RequireNonAlphanumeric = false;
+                    options.Password.RequireUppercase = false;
+                    options.Password.RequireLowercase = false;
+                })
+                .AddEntityFrameworkStores<DomainContext>();
             services
                 .LoadDomainRepositories()
                 .AddMediatR(Assembly.GetExecutingAssembly())
@@ -28,6 +43,26 @@ namespace OSRS.Infrastructure
                 action.ConstructServicesUsing(requestServices.GetService);
             }, new[] { Assembly.GetExecutingAssembly(), typeof(OperationResult).Assembly, typeof(DbLoggerCategory.Infrastructure).Assembly }, ServiceLifetime.Scoped);
 
+        }
+
+        public static IServiceCollection AddAutenticationService(this IServiceCollection services)
+        {
+            services
+                .AddIdentityCore<IdentityUser>(options =>
+                {
+                    options.SignIn.RequireConfirmedAccount = false;
+                    options.User.RequireUniqueEmail = true;
+                    options.Password.RequireDigit = false;
+                    options.Password.RequiredLength = 6;
+                    options.Password.RequireNonAlphanumeric = false;
+                    options.Password.RequireUppercase = false;
+                    options.Password.RequireLowercase = false;
+                })
+                .AddEntityFrameworkStores<DomainContext>();
+           
+            services.AddSingleton<IdentityUserContext<IdentityUser>, DomainContext>();
+
+            return services;
         }
         
         private static IServiceCollection LoadDomainRepositories(this IServiceCollection services)

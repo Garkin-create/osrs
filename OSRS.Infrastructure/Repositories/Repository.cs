@@ -14,9 +14,9 @@ namespace OSRS.Infrastructure.Repositories
     public abstract class Repository<T,TKey> : IRepository<T, TKey> where T : class, IEntity<TKey>
     {
         protected readonly DbSet<T> DataSet;
-        protected readonly OSRSContext _context;
+        protected readonly DomainContext _context;
         protected readonly IMapper _mapper;
-        public Repository(OSRSContext context, IMapper mapper = null)
+        public Repository(DomainContext context, IMapper mapper = null)
         {
             context.ChangeTracker.QueryTrackingBehavior = QueryTrackingBehavior.TrackAll;
             DataSet = context.Set<T>();
@@ -61,7 +61,7 @@ namespace OSRS.Infrastructure.Repositories
             bool answer = false;
             try
             {
-                using (var context = new OSRSContext())
+                using (var context = new DomainContext())
                 {
                     //var rowsToDelete = GetAll().
                     context.Set<T>().AddRange(entities);
@@ -82,7 +82,7 @@ namespace OSRS.Infrastructure.Repositories
             bool answer = false;
             try
             {
-                using (var context = new OSRSContext())
+                using (var context = new DomainContext())
                 {
                     context.Set<T>().RemoveRange(delete);
                     context.Set<T>().AddRange(entities);

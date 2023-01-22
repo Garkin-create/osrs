@@ -13,7 +13,7 @@ using Microsoft.Extensions.DependencyInjection;
 
 namespace ecomerce.Persistance.Repositories
 {
-    public abstract class BaseEntityRepository
+    public abstract class BaseEntityRepository 
     {
         protected readonly ISystemLogger _logger;
 
@@ -54,7 +54,7 @@ namespace ecomerce.Persistance.Repositories
             return services;
         }
     }
-    public class BaseEntityRepository<TEntity> : BaseEntityRepository where TEntity : class, IEntity
+    public class BaseEntityRepository<TEntity> : BaseEntityRepository where TEntity : class
     {
         protected readonly DbContext _context;
         public DbSet<TEntity> Entities { get; }

@@ -2,21 +2,25 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using OSRS.Domain.Entities;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
+using OSRS.Domain.Entities.Item;
 
 namespace OSRS.Infrastructure
 {
-    public partial class OSRSContext : DbContext
+    public partial class DomainContext : IdentityUserContext<IdentityUser>
     {
-        public OSRSContext()
+        public DomainContext()
         {
+            
         }
-
-        public OSRSContext(DbContextOptions<OSRSContext> options)
+        public DomainContext(DbContextOptions<DomainContext> options)
             : base(options)
         {
         }
 
-        public virtual DbSet<Alchemy> Alchemy { get; set; }
+        public virtual DbSet<AlchemyObject> Alchemy { get; set; }
+        public virtual DbSet<ItemObject> Item { get; set; }
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             if (!optionsBuilder.IsConfigured)
@@ -32,15 +36,23 @@ namespace OSRS.Infrastructure
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
+            base.OnModelCreating(modelBuilder);
             modelBuilder.HasAnnotation("Relational:Collation", "SQL_Latin1_General_CP1_CI_AS");
 
             //ENTITIES
-            modelBuilder.Entity<Alchemy>(entity =>
+            modelBuilder.Entity<AlchemyObject>(entity =>
             {
                 entity.HasKey(e => e.Id)
                 .HasName("PK_Alchemy");
 
                 entity.ToTable("Alchemy", "Alchemy");
+            });
+            modelBuilder.Entity<ItemObject>(entity =>
+            {
+                entity.HasKey(e => e.ItemId)
+                .HasName("PK_Item");
+
+                entity.ToTable("Item", "Item");
             });
             OnModelCreatingPartial(modelBuilder);
         }

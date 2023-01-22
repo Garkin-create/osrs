@@ -8,7 +8,11 @@ using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
 using System;
 using System.Text;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using OSRS.Application;
+using OSRS.Domain.Seed;
+using OSRS.Infrastructure.Repositories;
 
 namespace OSRS
 {
@@ -46,7 +50,7 @@ namespace OSRS
                 };
             });
 
-            // services.AddSingleton<IJwtManagerRepository, JwtManagerRepository>();
+           
 
             services.AddCors(options =>
             {
@@ -60,10 +64,12 @@ namespace OSRS
             });
 
             services.AddControllers();
-            services.AddDbContext<OSRSContext>();
+            services.AddDbContext<DomainContext>();
+            services.AddSingleton<ISystemLogger, SystemLogger>();
+            services.AddSingleton<IUserAccountRepository, UserAccountRepository>();
+            services.AddSingleton<IAlchemyEntityRepository, AlchemyRepository>();
 
             services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
-            //AddAutoMapperConfiguration(services);
             services.AddSwaggerGen(c =>
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "OSRS", Version = "v1" });

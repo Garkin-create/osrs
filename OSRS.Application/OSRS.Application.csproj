@@ -19,10 +19,9 @@
     </ItemGroup>
 
     <ItemGroup>
-      <Folder Include="Models\Alchemy\Handler" />
       <Folder Include="Models\Alchemy\MapProfile" />
-      <Folder Include="Models\Alchemy\Model" />
-      <Folder Include="Models\Alchemy\Queries" />
+      <Folder Include="Models\User\Model\Output" />
+      <Folder Include="Models\User\Queries" />
     </ItemGroup>
 
 </Project>
