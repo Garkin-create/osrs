@@ -10,6 +10,7 @@ using OSRS.Domain.Entities;
 using OSRS.Domain.Seed;
 using OSRS.Infrastructure.Helper;
 using Microsoft.Extensions.DependencyInjection;
+using OSRS.Infrastructure;
 
 namespace ecomerce.Persistance.Repositories
 {
@@ -48,7 +49,7 @@ namespace ecomerce.Persistance.Repositories
                         interfaceType = c.GetInterface(typeof(IEntityRepository<>).Name);
                 }
 
-              //  services.AddCommonImplementationService(interfaceType, implementationType);
+              services.AddCommonImplementationService(interfaceType, implementationType);
             }
 
             return services;
@@ -63,13 +64,11 @@ namespace ecomerce.Persistance.Repositories
         protected readonly DbSet<TEntity> DataSet;
         
         
-        public BaseEntityRepository(DbContext dbContext, ISystemLogger logger): base(logger)
+        public BaseEntityRepository(DbContext context, ISystemLogger logger): base(logger)
         {
-            dbContext.ChangeTracker.QueryTrackingBehavior = QueryTrackingBehavior.TrackAll;
-            Entities = _context.Set<TEntity>();
-            DataSet = _context.Set<TEntity>();
-            _context = dbContext;
-            
+            context.ChangeTracker.QueryTrackingBehavior = QueryTrackingBehavior.TrackAll;
+            DataSet = context.Set<TEntity>();
+            _context = context;
         }
 
         
