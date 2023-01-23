@@ -21,7 +21,7 @@ namespace OSRS.Admin.Controllers
         
         [HttpPost]
         [Route("AddUser")]
-        public Task<Response> AddAlchemy(AddUserInputModel model)
+        public Task<Response> AddAlchemy([FromBody] AddUserInputModel model)
             => _mediator.Send(new AddUserCommand(model));
         
         

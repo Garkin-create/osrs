@@ -8,11 +8,11 @@ using OSRS.Domain.Seed;
 
 namespace OSRS.Infrastructure.Repositories
 {
-    public class UserAccountRepository : BaseEntityRepository<UserAccountObject>, IUserAccountRepository
+    public class UserAccountRepository : BaseEntityRepository<UserAccountObject>, IEntityRepository<UserAccountObject>, IUserAccountRepository
     {
         private readonly UserManager<IdentityUser> _userManager;
 
-        public UserAccountRepository(DomainContext domainContext, ISystemLogger logger, UserManager<IdentityUser> userManager): base(domainContext, logger)
+        public UserAccountRepository(DomainContext domainContext, ISystemLogger logger, UserManager<IdentityUser> userManager) :base (domainContext, logger) //, UserManager<IdentityUser> userManager): base(domainContext, logger)
         {
             _userManager = userManager;
         }
@@ -36,7 +36,7 @@ namespace OSRS.Infrastructure.Repositories
         }
     }
     
-    public interface IUserAccountRepository : IEntityRepository<UserAccountObject>
+    public interface IUserAccountRepository 
     {
         public Task<bool> AddUser(UserAccountObject userAccount, CancellationToken cancellationToken = default);
     }

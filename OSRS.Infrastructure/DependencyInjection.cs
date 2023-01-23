@@ -10,6 +10,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using OSRS.Domain.Seed.UnitOfWorks;
+using OSRS.Infrastructure.Model.Domain;
 using OSRS.Infrastructure.Repositories;
 using Stu.Cubatel.Infrastructure.Model.Domain;
 
