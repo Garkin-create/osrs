@@ -10,6 +10,7 @@ using System;
 using System.Text;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore;
 using OSRS.Application;
 using OSRS.Domain.Seed;
 using OSRS.Infrastructure.Repositories;
@@ -64,9 +65,8 @@ namespace OSRS
             });
 
             services.AddControllers();
-            services.AddDbContext<DomainContext>();
-            // services.AddSingleton<IUserAccountRepository, UserAccountRepository>();
-            // services.AddSingleton<IAlchemyEntityRepository, AlchemyRepository>();
+            services.AddDbContext<DomainContext>(options =>
+                options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));;
 
             services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
             services.AddSwaggerGen(c =>

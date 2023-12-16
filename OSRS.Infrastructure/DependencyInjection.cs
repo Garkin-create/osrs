@@ -12,6 +12,7 @@ using Microsoft.Extensions.DependencyInjection;
 using OSRS.Domain.Seed.UnitOfWorks;
 using OSRS.Infrastructure.Model.Domain;
 using OSRS.Infrastructure.Repositories;
+using OSRS.Infrastructure.Services;
 using Stu.Cubatel.Infrastructure.Model.Domain;
 
 namespace OSRS.Infrastructure
@@ -34,7 +35,7 @@ namespace OSRS.Infrastructure
                 .AddEntityFrameworkStores<DomainContext>();
             services
                 .LoadDomainRepositories()
-                .AddMediatR(Assembly.GetExecutingAssembly())
+                // .AddMediatR(Assembly.GetExecutingAssembly())
                 .AddScoped<ISqlRetryPolicy, SqlRetryPolicy>()
                 .AddScoped<ISystemLogger, SystemLogger>();
             return services;
@@ -83,8 +84,10 @@ namespace OSRS.Infrastructure
             
             services.AddScoped<IDomainUnitOfWork, DomainUnitOfWork>();
             services.AddScoped<IAlchemyRepository, AlchemyRepository>();
+            services.AddScoped<IMovieRepository, MovieRepository>();
             services.AddScoped<IUserAccountRepository, UserAccountRepository>();
-
+            services.AddScoped<JwtService>();
+            
             return services;
         }
         

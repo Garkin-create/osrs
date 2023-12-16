@@ -4,6 +4,7 @@ using Microsoft.Extensions.Configuration;
 using OSRS.Domain.Entities;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
+using OSRS.Domain.Entities.Films;
 using OSRS.Domain.Entities.Item;
 
 namespace OSRS.Infrastructure
@@ -20,6 +21,7 @@ namespace OSRS.Infrastructure
         }
 
         public virtual DbSet<AlchemyObject> Alchemy { get; set; }
+        public virtual DbSet<MovieObject> Movie { get; set; }
         public virtual DbSet<ItemObject> Item { get; set; }
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
@@ -46,6 +48,13 @@ namespace OSRS.Infrastructure
                 .HasName("PK_Alchemy");
 
                 entity.ToTable("Alchemy", "Alchemy");
+            });
+            modelBuilder.Entity<MovieObject>(entity =>
+            {
+                entity.HasKey(e => e.Id)
+                .HasName("PK_Movie");
+
+                entity.ToTable("Movie", "Movie");
             });
             modelBuilder.Entity<ItemObject>(entity =>
             {
