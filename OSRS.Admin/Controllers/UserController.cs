@@ -3,10 +3,8 @@ using MediatR;
 using Microsoft.AspNetCore.Mvc;
 using OSRS.Application.Models.User.Command;
 using OSRS.Application.Models.User.Model.Input;
-using OSRS.Application.Models.User.Model.Output;
-using OSRS.Application.Models.User.Queries;
 using OSRS.Application.Seed.Models.Output;
-using OSRS.Domain.Models.Jwt;
+
 
 namespace OSRS.Admin.Controllers
 {
@@ -27,10 +25,10 @@ namespace OSRS.Admin.Controllers
         public Task<Response> AddAlchemy([FromBody] AddUserInputModel model)
             => _mediator.Send(new AddUserCommand(model));
 
-        [HttpPost]
-        [Route("Login")]
-        public Task<Response<AuthenticationOutputModel>> Login([FromBody] AuthenticationRequestModel model)
-            => _mediator.Send(new AuthenticationQuery(model));
+        // [HttpPost]
+        // [Route("Login")]
+        // public Task<Response<AuthenticationOutputModel>> Login([FromBody] AuthenticationRequestModel model)
+        //     => _mediator.Send(new AuthenticationQuery(model));
 
     }
 }

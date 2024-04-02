@@ -5,7 +5,7 @@ using System.Text;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.Extensions.Configuration;
 using Microsoft.IdentityModel.Tokens;
-using OSRS.Domain.Models.Jwt;
+// using OSRS.Domain.Models.Jwt;
 
 namespace OSRS.Infrastructure.Services
 {
@@ -20,23 +20,23 @@ namespace OSRS.Infrastructure.Services
             _configuration = configuration;
         }
         
-        public AuthenticationResponse CreateToken(IdentityUser user)
-        {
-            var expiration = DateTime.UtcNow.AddMinutes(EXPIRATION_MINUTES);
-
-            var token = CreateJwtToken(
-                CreateClaims(user),
-                CreateSigningCredentials(),
-                expiration
-            );
-
-            var tokenHandler = new JwtSecurityTokenHandler();
-
-            return new AuthenticationResponse {
-                Token = tokenHandler.WriteToken(token),
-                Expiration = expiration
-            };
-        }
+        // public AuthenticationResponse CreateToken(IdentityUser user)
+        // {
+        //     var expiration = DateTime.UtcNow.AddMinutes(EXPIRATION_MINUTES);
+        //
+        //     var token = CreateJwtToken(
+        //         CreateClaims(user),
+        //         CreateSigningCredentials(),
+        //         expiration
+        //     );
+        //
+        //     var tokenHandler = new JwtSecurityTokenHandler();
+        //
+        //     return new AuthenticationResponse {
+        //         Token = tokenHandler.WriteToken(token),
+        //         Expiration = expiration
+        //     };
+        // }
         
         private JwtSecurityToken CreateJwtToken(Claim[] claims, SigningCredentials credentials, DateTime expiration) =>
             new JwtSecurityToken(

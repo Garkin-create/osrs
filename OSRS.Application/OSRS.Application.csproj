@@ -20,6 +20,8 @@
 
     <ItemGroup>
       <Folder Include="Models\Alchemy\MapProfile" />
+      <Folder Include="Models\Movie\Model\Output\" />
+      <Folder Include="Models\Movie\Queries\" />
       <Folder Include="Models\User\Model\Output" />
       <Folder Include="Models\User\Queries" />
     </ItemGroup>

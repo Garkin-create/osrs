@@ -2,8 +2,7 @@
 using System.Threading;
 using System.Threading.Tasks;
 using ecomerce.Persistance.Repositories;
-using Microsoft.EntityFrameworkCore;
-using OSRS.Domain.Entities.Films;
+using OSRS.Domain.Entities.Movie;
 using OSRS.Domain.Seed;
 
 namespace OSRS.Infrastructure.Repositories

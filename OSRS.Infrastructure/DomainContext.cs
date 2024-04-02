@@ -4,8 +4,8 @@ using Microsoft.Extensions.Configuration;
 using OSRS.Domain.Entities;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
-using OSRS.Domain.Entities.Films;
 using OSRS.Domain.Entities.Item;
+using OSRS.Domain.Entities.Movie;
 
 namespace OSRS.Infrastructure
 {
