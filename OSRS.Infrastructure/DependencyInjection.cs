@@ -9,6 +9,7 @@ using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using OSRS.Domain.Entities;
 using OSRS.Domain.Seed.UnitOfWorks;
 using OSRS.Infrastructure.Model.Domain;
 using OSRS.Infrastructure.Repositories;
@@ -83,8 +84,8 @@ namespace OSRS.Infrastructure
             }
             
             services.AddScoped<IDomainUnitOfWork, DomainUnitOfWork>();
-            services.AddScoped<IAlchemyRepository, AlchemyRepository>();
-            services.AddScoped<IMovieRepository, MovieRepository>();
+            services.AddScoped<IProjectRepository, ProjectRepository>();
+            services.AddScoped<IKeywordRepository, KeywordRepository>();
             services.AddScoped<IUserAccountRepository, UserAccountRepository>();
             services.AddScoped<JwtService>();
             

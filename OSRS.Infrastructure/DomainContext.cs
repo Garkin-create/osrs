@@ -4,8 +4,7 @@ using Microsoft.Extensions.Configuration;
 using OSRS.Domain.Entities;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
-using OSRS.Domain.Entities.Item;
-using OSRS.Domain.Entities.Movie;
+using OSRS.Domain.Entities.Project;
 
 namespace OSRS.Infrastructure
 {
@@ -20,9 +19,8 @@ namespace OSRS.Infrastructure
         {
         }
 
-        public virtual DbSet<AlchemyObject> Alchemy { get; set; }
-        public virtual DbSet<MovieObject> Movie { get; set; }
-        public virtual DbSet<ItemObject> Item { get; set; }
+        public virtual DbSet<ProjectObject> Project { get; set; }
+        public virtual DbSet<KeywordObject> Keyword { get; set; }
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             if (!optionsBuilder.IsConfigured)
@@ -41,27 +39,20 @@ namespace OSRS.Infrastructure
             base.OnModelCreating(modelBuilder);
             modelBuilder.HasAnnotation("Relational:Collation", "SQL_Latin1_General_CP1_CI_AS");
 
-            //ENTITIES
-            modelBuilder.Entity<AlchemyObject>(entity =>
+            modelBuilder.Entity<ProjectObject>(entity =>
             {
                 entity.HasKey(e => e.Id)
-                .HasName("PK_Alchemy");
-
-                entity.ToTable("Alchemy", "Alchemy");
+                    .HasName("PK_Keyword");
+                entity.ToTable("Project");
+                entity.HasMany(e => e.Keyworks) 
+                    .WithOne(e => e.Project)
+                    .HasForeignKey(e => e.ProjectId);
             });
-            modelBuilder.Entity<MovieObject>(entity =>
+            modelBuilder.Entity<KeywordObject>(entity =>
             {
                 entity.HasKey(e => e.Id)
-                .HasName("PK_Movie");
-
-                entity.ToTable("Movie", "Movie");
-            });
-            modelBuilder.Entity<ItemObject>(entity =>
-            {
-                entity.HasKey(e => e.ItemId)
-                .HasName("PK_Item");
-
-                entity.ToTable("Item", "Item");
+                .HasName("PK_Keyword");
+                entity.ToTable("Keyword");
             });
             OnModelCreatingPartial(modelBuilder);
         }

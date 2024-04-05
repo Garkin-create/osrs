@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using OSRS.Infrastructure;
 
 namespace OSRS.Infrastructure.Migrations
 {
     [DbContext(typeof(DomainContext))]
-    partial class OSRSContextModelSnapshot : ModelSnapshot
+    [Migration("20240404234319_Add Projects")]
+    partial class AddProjects
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -157,19 +159,8 @@ namespace OSRS.Infrastructure.Migrations
                         .HasColumnType("bigint")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<int>("Device")
-                        .HasColumnType("int");
-
-                    b.Property<long>("ProjectId")
-                        .HasColumnType("bigint");
-
-                    b.Property<string>("Word")
-                        .HasColumnType("nvarchar(max)");
-
                     b.HasKey("Id")
                         .HasName("PK_Keyword");
-
-                    b.HasIndex("ProjectId");
 
                     b.ToTable("Keyword");
                 });
@@ -191,7 +182,7 @@ namespace OSRS.Infrastructure.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id")
-                        .HasName("PK_Keyword");
+                        .HasName("PK_Project");
 
                     b.ToTable("Project");
                 });
@@ -221,22 +212,6 @@ namespace OSRS.Infrastructure.Migrations
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
-                });
-
-            modelBuilder.Entity("OSRS.Domain.Entities.KeywordObject", b =>
-                {
-                    b.HasOne("OSRS.Domain.Entities.Project.ProjectObject", "Project")
-                        .WithMany("Keyworks")
-                        .HasForeignKey("ProjectId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Project");
-                });
-
-            modelBuilder.Entity("OSRS.Domain.Entities.Project.ProjectObject", b =>
-                {
-                    b.Navigation("Keyworks");
                 });
 #pragma warning restore 612, 618
         }
