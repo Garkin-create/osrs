@@ -5,6 +5,7 @@ using OSRS.Domain.Entities;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using OSRS.Domain.Entities.Project;
+using OSRS.Domain.Entities.Traking;
 
 namespace OSRS.Infrastructure
 {
@@ -21,6 +22,7 @@ namespace OSRS.Infrastructure
 
         public virtual DbSet<ProjectObject> Project { get; set; }
         public virtual DbSet<KeywordObject> Keyword { get; set; }
+        public virtual DbSet<TrackingObject> Tracking { get; set; }
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             if (!optionsBuilder.IsConfigured)
@@ -53,7 +55,17 @@ namespace OSRS.Infrastructure
                 entity.HasKey(e => e.Id)
                 .HasName("PK_Keyword");
                 entity.ToTable("Keyword");
+                entity.HasMany(e => e.Trackings)
+                    .WithOne(e => e.Keyword)
+                    .HasForeignKey(e => e.KeywordId);
             });
+            modelBuilder.Entity<TrackingObject>(entity =>
+            {
+                entity.HasKey(e => e.Id)
+                .HasName("PK_Tracking");
+                entity.ToTable("Tracking");
+            });
+            
             OnModelCreatingPartial(modelBuilder);
         }
 
