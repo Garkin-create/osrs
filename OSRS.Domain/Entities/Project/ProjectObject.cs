@@ -7,6 +7,7 @@ namespace OSRS.Domain.Entities.Project
         public string Title { get; set; }
         public string Url { get; set; }
         public bool Default { get; set; }
+        // public string Country { get; set; }
         public ICollection<KeywordObject> Keyworks { get; set; }
     }
 }

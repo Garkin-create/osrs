@@ -11,6 +11,8 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using OSRS.Domain.Entities;
 using OSRS.Domain.Seed.UnitOfWorks;
+using OSRS.Domain.Service;
+using OSRS.Infrastructure.ApiClient;
 using OSRS.Infrastructure.Model.Domain;
 using OSRS.Infrastructure.Repositories;
 using OSRS.Infrastructure.Services;
@@ -87,6 +89,10 @@ namespace OSRS.Infrastructure
             services.AddScoped<IProjectRepository, ProjectRepository>();
             services.AddScoped<IKeywordRepository, KeywordRepository>();
             services.AddScoped<IUserAccountRepository, UserAccountRepository>();
+            
+            //SERVICES
+            services.AddScoped<IWordPressService, WordPressService>();
+            services.AddScoped<IRestApiClient, RestApiClient>();
             services.AddScoped<JwtService>();
             
             return services;
