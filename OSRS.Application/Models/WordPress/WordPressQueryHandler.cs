@@ -13,7 +13,8 @@ using Stu.Cubatel.Application.Seed.Queries;
 namespace OSRS.Application.Models.WordPress
 {
     public class WordPressQueryHandler:
-        IQueryHandler<CategoryListQuery, Response<IEnumerable<CategoryListOutputModel>>>
+        IQueryHandler<CategoryListQuery, Response<IEnumerable<CategoryListOutputModel>>>,
+        IQueryHandler<PostListQuery, Response<IEnumerable<PostListOutputModel>>>
 
     {
         private readonly IWordPressService _wordPressService;
@@ -33,6 +34,24 @@ namespace OSRS.Application.Models.WordPress
             {
                 result = new Response<IEnumerable<CategoryListOutputModel>>(true, 
                     _mapper.Map<IEnumerable<CategoryListOutputModel>>(await _wordPressService.GetWordPressCategoryAsync(request.Model.Url))) ;
+            }
+            catch (Exception exc)
+            {
+                // await _logger.LogExceptionAsync(this, exc, null, null, cancellationToken, nameof(GetProductsStatsDashboardQuery));
+                result = new(false, I18n.UnknownError);
+            }
+
+            return result;
+        }
+
+        public async Task<Response<IEnumerable<PostListOutputModel>>> Handle(PostListQuery request, CancellationToken cancellationToken)
+        {
+            Response<IEnumerable<PostListOutputModel>> result;
+
+            try
+            {
+                result = new Response<IEnumerable<PostListOutputModel>>(true, 
+                    _mapper.Map<IEnumerable<PostListOutputModel>>(await _wordPressService.GetWordPressPostAsync(request.Model.Url, request.Model.Page, request.Model.ItemPerPage))) ;
             }
             catch (Exception exc)
             {

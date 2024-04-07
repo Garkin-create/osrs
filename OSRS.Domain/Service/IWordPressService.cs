@@ -9,5 +9,9 @@ namespace OSRS.Domain.Service
     {
         Task<IEnumerable<CategoryModel>> GetWordPressCategoryAsync(string url,
             CancellationToken cancellationToken = default);
+
+        Task<IEnumerable<PostModel>> GetWordPressPostAsync(string url, int page, int itemPerPage,
+            CancellationToken cancellationToken = default);
+
     }
 }
