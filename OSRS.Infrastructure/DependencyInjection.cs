@@ -93,6 +93,7 @@ namespace OSRS.Infrastructure
             //SERVICES
             services.AddScoped<IWordPressService, WordPressService>();
             services.AddScoped<IRestApiClient, RestApiClient>();
+            services.AddScoped<ISearchGoogleService, SearchGoogleService>();
             services.AddScoped<JwtService>();
             
             return services;
