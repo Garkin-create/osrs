@@ -187,6 +187,7 @@ namespace ecomerce.Persistance.Repositories
             }
             catch (Exception exc)
             {
+                answer = false;
                 // await _logger.LogExceptionAsync(this, exc, cancellationToken: cancellationToken);
             }
 

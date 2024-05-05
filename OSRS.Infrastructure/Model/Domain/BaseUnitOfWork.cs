@@ -54,33 +54,34 @@ namespace OSRS.Infrastructure.Model.Domain
             }
             catch (Exception exc)
             {
-                //UniqueKey Violation exceptions
-                var sqlException = exc.InnerException as SqlException;
-                if (sqlException?.Number is 2601 or 2627)
-                    return commit;
-
-                var additionalData = new Dictionary<LogDetailsType, object>();
-                try
-                {
-                    if (exc is DbUpdateException dbExc)
-                    {
-                        var settings = new JsonSerializerSettings()
-                        {
-                            MaxDepth = 1,
-                            ReferenceLoopHandling = ReferenceLoopHandling.Ignore
-                        };
-                        additionalData.Add(LogDetailsType.RequestData,
-                            dbExc.Entries.Select(p => JsonConvert.SerializeObject(p.Entity, settings)));
-                    }
-                }
-                catch (Exception e)
-                {
-                    additionalData.Add(LogDetailsType.RequestData, e.Message);
-                }
-                await _logger.LogExceptionAsync(this, exc, additionalData: additionalData, cancellationToken: cancellationToken
-                    , methodName: !string.IsNullOrEmpty(methodName) ? methodName : nameof(CommitAsync));
-                if (_transaction != null)
-                    await _transaction.RollbackAsync(cancellationToken);
+                return false;
+                // //UniqueKey Violation exceptions
+                // var sqlException = exc.InnerException as SqlException;
+                // if (sqlException?.Number is 2601 or 2627)
+                //     return commit;
+                //
+                // var additionalData = new Dictionary<LogDetailsType, object>();
+                // try
+                // {
+                //     if (exc is DbUpdateException dbExc)
+                //     {
+                //         var settings = new JsonSerializerSettings()
+                //         {
+                //             MaxDepth = 1,
+                //             ReferenceLoopHandling = ReferenceLoopHandling.Ignore
+                //         };
+                //         additionalData.Add(LogDetailsType.RequestData,
+                //             dbExc.Entries.Select(p => JsonConvert.SerializeObject(p.Entity, settings)));
+                //     }
+                // }
+                // catch (Exception e)
+                // {
+                //     additionalData.Add(LogDetailsType.RequestData, e.Message);
+                // }
+                // await _logger.LogExceptionAsync(this, exc, additionalData: additionalData, cancellationToken: cancellationToken
+                //     , methodName: !string.IsNullOrEmpty(methodName) ? methodName : nameof(CommitAsync));
+                // if (_transaction != null)
+                //     await _transaction.RollbackAsync(cancellationToken);
             }
             finally
             {

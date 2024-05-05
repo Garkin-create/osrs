@@ -4,6 +4,7 @@ using Microsoft.Extensions.Configuration;
 using OSRS.Domain.Entities;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
+using OSRS.Domain.Entities.Post;
 using OSRS.Domain.Entities.Project;
 using OSRS.Domain.Entities.Traking;
 
@@ -22,6 +23,7 @@ namespace OSRS.Infrastructure
 
         public virtual DbSet<ProjectObject> Project { get; set; }
         public virtual DbSet<KeywordObject> Keyword { get; set; }
+        public virtual DbSet<ProjectObject> Post { get; set; }
         public virtual DbSet<TrackingObject> Tracking { get; set; }
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
@@ -64,6 +66,12 @@ namespace OSRS.Infrastructure
                 entity.HasKey(e => e.Id)
                 .HasName("PK_Tracking");
                 entity.ToTable("Tracking");
+            });
+            modelBuilder.Entity<PostObject>(entity =>
+            {
+                entity.HasKey(e => e.Id)
+                .HasName("PK_Post");
+                entity.ToTable("Post");
             });
             
             OnModelCreatingPartial(modelBuilder);

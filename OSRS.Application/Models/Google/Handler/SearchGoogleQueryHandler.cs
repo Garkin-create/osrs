@@ -28,7 +28,7 @@ namespace OSRS.Application.Models.Google.Handler
             try
             {
                 result = new Response<int>(true, 
-                    _mapper.Map<int>(await _searchGoogleService.GetWordPressCategoryAsync(request.Model.Keyword, request.Model.Url))) ;
+                    _mapper.Map<int>(await _searchGoogleService.GetKeywordPositionAsync(request.Model.Keyword, request.Model.Url, 100))) ;
             }
             catch (Exception exc)
             {
