@@ -8,6 +8,7 @@ using OSRS.Application.Seed.Models.Output;
 using OSRS.Domain.Entities.User;
 using OSRS.Domain.Repositories;
 using OSRS.Domain.Seed.UnitOfWorks;
+using OSRS.Domain.Service;
 using OSRS.Infrastructure.Repositories;
 
 namespace OSRS.Application.Models.User.Handler
@@ -16,12 +17,14 @@ namespace OSRS.Application.Models.User.Handler
     {
         private readonly IMapper _mapper;
         private readonly IDomainUnitOfWork _unitOfWork;
+        private readonly ISearchGoogleService _searchGoogleService;
         private readonly IUserAccountRepository _accountRepository;
         
-        public UserCommandHandler(IMapper mapper, IDomainUnitOfWork unitOfWork, IUserAccountRepository accountRepository)
+        public UserCommandHandler(IMapper mapper, IDomainUnitOfWork unitOfWork, ISearchGoogleService searchGoogleService, IUserAccountRepository accountRepository)
         {
             _mapper = mapper;
             _unitOfWork = unitOfWork;
+            _searchGoogleService = searchGoogleService;
             _accountRepository = accountRepository;
         }
 
@@ -33,7 +36,7 @@ namespace OSRS.Application.Models.User.Handler
                 var account = _mapper.Map<UserAccountObject>(request.Model);
                 await _unitOfWork.ExecuteInTransactionAsync(async (cancellationToken) =>{
                     await _unitOfWork.BeginTransactionAsync(cancellationToken);
-                    await _accountRepository.AddUser(account);
+                    await _searchGoogleService.KeywordRank();
                     if (await _unitOfWork.CommitAsync(cancellationToken, nameof(AddUserCommand)))
                         result = new Response(true, string.Empty);
                 }, cancellationToken);

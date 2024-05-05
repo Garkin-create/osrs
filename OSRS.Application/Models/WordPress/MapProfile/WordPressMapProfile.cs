@@ -11,6 +11,12 @@ namespace OSRS.Application.Models.WordPress.MapProfile
         public WordPressMapProfile()
         {
             CreateMap<CategoryModel, CategoryListOutputModel>();
+            CreateMap<PostModel, PostListOutputModel>()
+                .ForMember(dest => dest.title,
+                    opt => opt.MapFrom(s => s.title.rendered))
+                .ForMember(dest => dest.content,
+                    opt => opt.MapFrom(s => s.content.rendered))
+                ;
         }
     }
 }

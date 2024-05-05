@@ -88,11 +88,17 @@ namespace OSRS.Infrastructure
             services.AddScoped<IDomainUnitOfWork, DomainUnitOfWork>();
             services.AddScoped<IProjectRepository, ProjectRepository>();
             services.AddScoped<IKeywordRepository, KeywordRepository>();
+            services.AddScoped<ITrackingRepository, TrackingRepository>();
+            services.AddScoped<IPostRepository, PostRepository>();
             services.AddScoped<IUserAccountRepository, UserAccountRepository>();
             
             //SERVICES
             services.AddScoped<IWordPressService, WordPressService>();
             services.AddScoped<IRestApiClient, RestApiClient>();
+            services.AddScoped<ISearchGoogleService, SearchGoogleService>();
+            services.AddScoped<IOpenIAService, OpenIAService>();
+            services.AddScoped<IScrapService, ScrapService>();
+           
             services.AddScoped<JwtService>();
             
             return services;
